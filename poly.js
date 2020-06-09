@@ -1,64 +1,100 @@
 //create a function that takes in an integer for a person's age and an array of objects of type : "country minimum age checker" that checks the minimum age for different activities in different countries
 
-age = 17
+var minimumAgeChecker = (ckage, objarr) =>{
+  objarr.forEach(val => {
+    val.isOfDrivingAge(ckage);
+    val.isOfVotingAge(ckage);
+    val.isOfDrinkingAge(ckage);
+    console.log("--------------------------")
+  })
+  }
 
-array = [CountryMinimumAgeChecker,UsaMinimumAgeChecker,CanadaMinimumAgeChecker,FranceMinimumAgeChecker]
-
-minimumAgeChecker(age,array)
-//prints the below output to the screen (these responses may not be accurate but is just an example)
-
-//you can drive in most countries:false
-//you can drive in most countries:false
-//you can drive in most countries:false
-
-//you can drive in United States: true
-//you can vote in United States: false
-//you can drink in United States: false
-
-//you can drive in Canada: true
-//you can vote in Canada: true
-//you can drink in Canada: false
-
-//you can drive in France: true
-//you can vote in France: true
-//you can drink in France: false
+  var personage = (perarr,array) =>{
+      for (var key in perarr){
+        console.log("Is " + perarr[key].name + " able to do these activities at " + perarr[key].age + " years old?\n")
+        minimumAgeChecker(perarr[key].age, array);
+      }
+  }
 
 class CountryMinimumAgeChecker{
 
   //set the default age for driving,drinking,and voting to be 21
-
+    constructor(){
+      this.driving = false;
+      this.drinking = false;
+      this.voting = false;
+    }
   //takes in an integer for age and returns true or false if that age is allowed to drive in that country
-  isOfDrivingAge(value){
-
+  isOfDrivingAge(value){ this.driving = value ? value>=16 : value<16;
+    return console.log("Old enough to drive in most countries: " + this.driving);
   }
-
    //takes in an integer for age and returns true or false if that age is allowed to drive in that country
-  isOfVotingAge(value){
-    
+  isOfVotingAge(value){ this.voting = value ? value>=18 : value<18;
+    return console.log("Old enough to vote in most countries: " + this.voting);
   }
-
    //takes in an integer for age and returns true or false if that age is allowed to drive in that country
-  isOfDrinkingAge(value){
-    
+  isOfDrinkingAge(value){this.drinking = value ? value>21 : value<21;
+     return console.log("Old enough to drink in most countries: " + this.drinking);
   }
 }
 
-//UsaMinimumAgeChecker,CanadaMinimumAgeChecker,FranceMinimumAgeChecker
-//are classes that inherit from CountryMinimumAgeChecker
+class UsaMinimumAgeChecker extends CountryMinimumAgeChecker{
+  constructor(){
+    super();
+  }
+  //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+  isOfDrivingAge(value){ this.driving = value ? value>=16 : value<16;
+    return console.log("Old enough to drive in USA: " + this.driving);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfVotingAge(value){ this.voting = value ? value>=18 : value<18;
+  return console.log("Old enough to vote in USA: " + this.voting);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfDrinkingAge(value){ this.drinking = value ? value>=21 : value<21;
+  return console.log("Old enough to drink in USA: " + this.drinking);
+}
+}
 
-//wikipedia page to check ages...if multiple ages, go with the minimum, if no ages, assume 21 is the correct age.
+class CanadaMinimumAgeChecker extends CountryMinimumAgeChecker{
+  constructor(){
+    super();
+  }
+  //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+  isOfDrivingAge(value){ this.driving = value ? value>=16 : value<16;
+    return console.log("Old enough to drive in Canada: " + this.driving);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfVotingAge(value){ this.voting = value ? value>=18 : value<18;
+  return console.log("Old enough to vote in Canada: " + this.voting);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfDrinkingAge(value){ this.drinking = value ? value>=19 : value<19;
+  return console.log("Old enough to drink in Canada: " + this.drinking);
+}
+}
 
-//driving - https://en.wikipedia.org/wiki/List_of_minimum_driving_ages
-//voting - https://en.wikipedia.org/wiki/Voting_age
-//drinking - https://en.wikipedia.org/wiki/Legal_drinking_age
+class FranceMinimumAgeChecker extends CountryMinimumAgeChecker{
+  constructor(){
+    super();
+  }
+  //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+  isOfDrivingAge(value){ this.driving = value ? value>=18 : value<18;
+    return console.log("Old enough to drive in France: " + this.driving);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfVotingAge(value){ this.voting = value ? value>=18 : value<18;
+  return console.log("Old enough to vote in France: " + this.voting);
+}
+ //takes in an integer for age and returns true or false if that age is allowed to drive in that country
+isOfDrinkingAge(value){ this.drinking = value ? value>=16 : value<16;
+  return console.log("Old enough to drink in France: " + this.drinking);
+}
+}
 
-//for extra credit create another function that takes an array of person objects like the one below and prints to the screen their status for an array of country checkers
-person = {name: "John Doe", age:17}
+//*************************   MAIN   ************************ */
+var array = [new CountryMinimumAgeChecker,new UsaMinimumAgeChecker,new CanadaMinimumAgeChecker,new FranceMinimumAgeChecker]
+var perarr = [{'name' : "John Doe", 'age' : 17}, {'name' : "Jane Smith", 'age' : 20}, {'name' : "Jack Daniels", 'age' : 14}]
 
-minimumAgeChecker(age,array)
-
-//for extra credit add additional countries other than Usa,Canada, and France to the array and create minimum age checker classes for them
-
-
-//post link learn
+personage(perarr, array);
 
